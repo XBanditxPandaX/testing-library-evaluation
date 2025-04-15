@@ -1,7 +1,5 @@
 # Exercice de test d'intégration
 
-test
-
 ## Consignes
 
 Il faut créer un nouvel handler pour mocker l'api du submitForm. Pour le cas

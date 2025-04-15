@@ -49,4 +49,16 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   const reviewLink = screen.getByText('Review')
   expect(reviewLink).toBeInTheDocument()
   userEvent.click(reviewLink)
+
+  //Page de confirmation
+  expect(screen.getByRole('heading', {name: 'Confirm'})).toBeInTheDocument()
+  expect(screen.getByText('Please confirm your choices')).toBeInTheDocument()
+  expect(screen.getByLabelText(/favorite food/i)).toHaveTextContent('Les pâtes')
+  expect(screen.getByLabelText(/favorite drink/i)).toHaveTextContent(
+    'Coca-Cola Zero',
+  )
+  expect(screen.getByText('Go Back')).toBeInTheDocument()
+  const confirmButton = screen.getByRole('button', {name: 'Confirm'})
+  expect(confirmButton).toBeInTheDocument()
+  userEvent.click(confirmButton)
 })

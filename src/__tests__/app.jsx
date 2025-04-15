@@ -72,3 +72,13 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   userEvent.click(goHomeLink)
   expect(screen.getByText('Welcome home')).toBeInTheDocument()
 })
+
+test('Scénario 2 : Parcours avec erreur (champ food vide)', async () => {
+  render(<App />)
+
+  //Page d'accueil
+  expect(screen.getByText('Welcome home')).toBeInTheDocument()
+  const fillFormLink = screen.getByText('Fill out the form')
+  expect(fillFormLink).toBeInTheDocument()
+  userEvent.click(fillFormLink)
+})

@@ -35,7 +35,7 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   expect(screen.getByText('Go Home')).toBeInTheDocument()
   const foodInput = screen.getByLabelText(/favorite food/i)
   expect(foodInput).toBeInTheDocument()
-  userEvent.type(foodInput, 'Les pâtes')
+  userEvent.type(foodInput, 'Pastas')
   const next = screen.getByText('Next')
   expect(next).toBeInTheDocument()
   userEvent.click(next)
@@ -53,7 +53,7 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   //Page de confirmation
   expect(screen.getByRole('heading', {name: 'Confirm'})).toBeInTheDocument()
   expect(screen.getByText('Please confirm your choices')).toBeInTheDocument()
-  expect(screen.getByLabelText(/favorite food/i)).toHaveTextContent('Les pâtes')
+  expect(screen.getByLabelText(/favorite food/i)).toHaveTextContent('Pastas')
   expect(screen.getByLabelText(/favorite drink/i)).toHaveTextContent(
     'Coca-Cola Zero',
   )
@@ -90,4 +90,26 @@ test('Scénario 2 : Parcours avec erreur (champ food vide)', async () => {
   const nextLink = screen.getByText('Next')
   expect(nextLink).toBeInTheDocument()
   userEvent.click(nextLink)
+
+  //Page 2
+  expect(screen.getByText('Page 2')).toBeInTheDocument()
+  expect(screen.getByText('Go Back')).toBeInTheDocument()
+  const drinkInput = screen.getByLabelText(/favorite drink/i)
+  expect(drinkInput).toBeInTheDocument()
+  userEvent.type(drinkInput, 'Coca-Cola Zero')
+  const reviewLink = screen.getByText('Review')
+  expect(reviewLink).toBeInTheDocument()
+  userEvent.click(reviewLink)
+
+  //Page de confirmation
+  expect(screen.getByRole('heading', {name: 'Confirm'})).toBeInTheDocument()
+  expect(screen.getByText('Please confirm your choices')).toBeInTheDocument()
+  expect(screen.getByLabelText(/favorite food/i)).toHaveTextContent('')
+  expect(screen.getByLabelText(/favorite drink/i)).toHaveTextContent(
+    'Coca-Cola Zero',
+  )
+  expect(screen.getByText('Go Back')).toBeInTheDocument()
+  const confirmButton = screen.getByRole('button', {name: 'Confirm'})
+  expect(confirmButton).toBeInTheDocument()
+  userEvent.click(confirmButton)
 })

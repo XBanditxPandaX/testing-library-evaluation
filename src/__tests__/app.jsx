@@ -81,4 +81,13 @@ test('Scénario 2 : Parcours avec erreur (champ food vide)', async () => {
   const fillFormLink = screen.getByText('Fill out the form')
   expect(fillFormLink).toBeInTheDocument()
   userEvent.click(fillFormLink)
+
+  //Page 1
+  expect(screen.getByText('Page 1')).toBeInTheDocument()
+  expect(screen.getByText('Go Home')).toBeInTheDocument()
+  const foodInput = screen.getByLabelText(/favorite food/i)
+  expect(foodInput).toBeInTheDocument()
+  const nextLink = screen.getByText('Next')
+  expect(nextLink).toBeInTheDocument()
+  userEvent.click(nextLink)
 })

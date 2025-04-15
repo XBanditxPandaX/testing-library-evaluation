@@ -24,20 +24,29 @@ beforeEach(() => {
 test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   render(<App />)
 
+  //Page d'accueil
   expect(screen.getByText('Welcome home')).toBeInTheDocument()
-
   const fillFormLink = screen.getByText('Fill out the form')
   expect(fillFormLink).toBeInTheDocument()
   userEvent.click(fillFormLink)
 
+  //Page 1
   expect(screen.getByText('Page 1')).toBeInTheDocument()
   expect(screen.getByText('Go Home')).toBeInTheDocument()
-
   const foodInput = screen.getByLabelText(/favorite food/i)
   expect(foodInput).toBeInTheDocument()
   userEvent.type(foodInput, 'Les pâtes')
-
   const next = screen.getByText('Next')
   expect(next).toBeInTheDocument()
   userEvent.click(next)
+
+  //Page 2
+  expect(screen.getByText('Page 2')).toBeInTheDocument()
+  expect(screen.getByText('Go Back')).toBeInTheDocument()
+  const drinkInput = screen.getByLabelText(/favorite drink/i)
+  expect(drinkInput).toBeInTheDocument()
+  userEvent.type(drinkInput, 'Coca-Cola Zero')
+  const reviewLink = screen.getByText('Review')
+  expect(reviewLink).toBeInTheDocument()
+  userEvent.click(reviewLink)
 })

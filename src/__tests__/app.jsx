@@ -29,4 +29,15 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   const fillFormLink = screen.getByText('Fill out the form')
   expect(fillFormLink).toBeInTheDocument()
   userEvent.click(fillFormLink)
+
+  expect(screen.getByText('Page 1')).toBeInTheDocument()
+  expect(screen.getByText('Go Home')).toBeInTheDocument()
+
+  const foodInput = screen.getByLabelText(/favorite food/i)
+  expect(foodInput).toBeInTheDocument()
+  userEvent.type(foodInput, 'Les pâtes')
+
+  const next = screen.getByText('Next')
+  expect(next).toBeInTheDocument()
+  userEvent.click(next)
 })

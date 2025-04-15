@@ -61,4 +61,14 @@ test('Scénario 1 : Parcours complet du formulaire avec succès', async () => {
   const confirmButton = screen.getByRole('button', {name: 'Confirm'})
   expect(confirmButton).toBeInTheDocument()
   userEvent.click(confirmButton)
+
+  //Page de succès
+  await waitFor(() => {
+    expect(screen.getByText('Congrats. You did it.')).toBeInTheDocument()
+  })
+
+  const goHomeLink = screen.getByText('Go home')
+  expect(goHomeLink).toBeInTheDocument()
+  userEvent.click(goHomeLink)
+  expect(screen.getByText('Welcome home')).toBeInTheDocument()
 })

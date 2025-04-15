@@ -112,4 +112,17 @@ test('Scénario 2 : Parcours avec erreur (champ food vide)', async () => {
   const confirmButton = screen.getByRole('button', {name: 'Confirm'})
   expect(confirmButton).toBeInTheDocument()
   userEvent.click(confirmButton)
+
+  //Page d'erreur
+  await waitFor(() => {
+    expect(screen.getByText('Oh no. There was an error.')).toBeInTheDocument()
+  })
+  expect(
+    screen.getByText('les champs food et drink sont obligatoires'),
+  ).toBeInTheDocument()
+  expect(screen.getByText('Go Home')).toBeInTheDocument()
+  const tryAgainLink = screen.getByText('Try again')
+  expect(tryAgainLink).toBeInTheDocument()
+  userEvent.click(tryAgainLink)
+  expect(screen.getByText('Page 1')).toBeInTheDocument()
 })
